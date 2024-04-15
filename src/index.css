@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.linkitem.active {
+  background-color: yellow;
+  /* Add any other styles you want to apply to the active link */
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(247, 243, 243);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  row-gap: 25px;
+  column-gap: 15px;
+}
+::-webkit-scrollbar {
+  background-color: #f5f5f5;
+  width: 5px; /* Change the background color of the track */
+}
+
+/* Targeting the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Change the color of the scrollbar handle */
+  border-radius: 10px;
+
+  /* Add rounded corners to the scrollbar handle */
+}
+
+/* Targeting the scrollbar on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: white; /* Change the color of the scrollbar handle on hover */
+}
