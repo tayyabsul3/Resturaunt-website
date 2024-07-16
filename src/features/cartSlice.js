@@ -11,7 +11,6 @@ const cartSlice = createSlice({
       const producttoadd = state.cartItems.findIndex((item) => {
         return item.id === id;
       });
-      console.log(producttoadd);
       if (producttoadd !== -1) {
         state.cartItems[producttoadd].quantity += 1;
       } else {
@@ -40,11 +39,9 @@ const cartSlice = createSlice({
         }
       });
     },
-    clearcart:(state , action)=>{
+    clearcart: (state, action) => {
       state.cartItems = [];
-    }
-    
-    
+    },
   },
 });
 

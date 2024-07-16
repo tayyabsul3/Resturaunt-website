@@ -28,11 +28,9 @@ export const Product = () => {
   */
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
 
   const location = useLocation();
   const { product, setDraweropen } = location.state;
-  console.log(product);
   const {
     quantity,
     name,
@@ -127,8 +125,6 @@ export const Product = () => {
                         image,
                         quantity: Quantity,
                       };
-
-                      console.log(item);
 
                       dispatch(addtocart(item));
 

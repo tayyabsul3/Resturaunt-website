@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import { RiAccountCircleFill } from "react-icons/ri";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaHamburger, FaShoppingCart } from "react-icons/fa";
 import Modal from "./Modal";
 import ShopStatus from "./ShopStatus";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showcart } from "../features/drawerSlice";
 import Login from "./Login";
 import myContext from "../context/myContext";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = ({ displayrightnav }) => {
   // const drawerState = useSelector(state => state.Drawer.drawer);
@@ -57,14 +58,14 @@ const Navbar = ({ displayrightnav }) => {
       )}
       <ShopStatus />
 
-      <div className="sm:flex-row flex justify-between px-10 py-0 bg-yellow-400 items-center flex-row-reverse">
+      <div className="sm:flex-row flex justify-between px-2 md:px-10 py-0 bg-yellow-400 items-center flex-row-reverse">
         <div
           className="location flex items-center gap-1 cursor-pointer"
           onClick={() => {
             setisOpen((prev) => (prev = !prev));
           }}
         >
-          <FaLocationDot className="text-red-600 text-3xl" />
+          <FaLocationDot className="text-red-600 text-3xl " />
           <div className="deliverto flex flex-col ">
             <p>Deliver to</p>
             <p className="address text-sm">Address</p>
@@ -81,7 +82,6 @@ const Navbar = ({ displayrightnav }) => {
               <IoSearchSharp className="text-red-600 " />
             </div>
             <div className="account border-l-[1px] border-red-600 p-2 cursor-pointer transition duration-500">
-              {console.log(UserImageURL)}
               {UserImageURL ? (
                 <img
                   src={UserImageURL}
@@ -123,6 +123,14 @@ const Navbar = ({ displayrightnav }) => {
         ) : (
           ""
         )}
+        <div
+          className="text-red-600 sm:hidden"
+          onClick={() => {
+            dispatch(showcart());
+          }}
+        >
+          <GiHamburgerMenu className="text-3xl" />
+        </div>
       </div>
     </div>
   );

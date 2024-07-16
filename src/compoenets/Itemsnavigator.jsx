@@ -721,12 +721,10 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
 
   function handleCardClick(product) {
     setproductObject(product);
-    console.log(product);
   }
 
   // Function to handle adding a product to the cart
   function handleAddToCartPress(product) {
-    console.log(product);
     dispatch(addtocart(product));
   }
 
