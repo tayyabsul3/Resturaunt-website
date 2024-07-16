@@ -50,7 +50,7 @@ export const Product = () => {
 
   return (
     <>
-    <Navbar displayrightnav={true}  />
+      <Navbar displayrightnav={true} />
       <div className="flex flex-col">
         <div className="product p-2 md:p-4 lg:p-8">
           <div className="card bg-white max-w-[1500px] p-2 rounded-lg border-2  border-white    shadow-sm cursor-pointer mx-auto">
@@ -80,9 +80,9 @@ export const Product = () => {
                 </div>
 
                 <div className="flex gap-6 flex-col lg:flex-row">
-                  <div className="quantitycontroller flex gap-1 items-center justify-center">
+                  <div className="quantitycontroller flex gap-1 items-center justify-center ">
                     <button
-                      className="subtract-button h-12 bg-red-500 px-4 py-1 text-3xl rounded-3xl
+                      className="subtract-button md:h-12 bg-red-500 px-4 py-1 text-3xl rounded-3xl
                    "
                       onClick={() => {
                         if (Quantity === 1) {
@@ -97,7 +97,7 @@ export const Product = () => {
                     >
                       -
                     </button>
-                    <p className="h-12 border-[1px] border-gray-300 px-6 py-1 text-3xl rounded-3xl bg-white ">
+                    <p className="md:h-12 border-[1px] px-4 border-gray-300 md:px-6 py-1 text-3xl rounded-3xl bg-white ">
                       {Quantity}
                     </p>
                     <button
@@ -108,13 +108,15 @@ export const Product = () => {
                         console.log();
                         console.log(Quantity);
                       }}
-                      className="add-button h-12 bg-red-500 px-4 py-1 text-3xl rounded-3xl "
+                      className="add-button md:h-12 bg-red-500 px-4 py-1 text-3xl rounded-3xl "
                     >
                       +
                     </button>
                   </div>
                   <div
-                    className="pricing flex  justify-between px-5 gap-10  items-center mx-auto bg-red-600 font-bold py-3 rounded-full ml-auto hover:bg-yellow-400 w-[80%] lg:w-[60%]  text-white hover:text-black mt-1 mb-1 transition duration-100"
+                    className="pricing flex justify-between md:px-5 md:gap-10  items-center mx-auto bg-red-600 font-bold py-3 rounded-full ml-auto hover:bg-yellow-400 md:w-[80%] lg:w-[60%]  text-white hover:text-black mt-1 mb-1 transition duration-100
+                    w-full px-5
+                    "
                     onClick={() => {
                       item = {
                         id,

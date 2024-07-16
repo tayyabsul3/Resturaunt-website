@@ -733,9 +733,9 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="mt-2 flex justify-center items-center ">
+      <nav className="md:mt-2 flex justify-center items-center ">
         <div className="scroll container lg:w-full mx-auto flex lg:overflow-visible lg:min-h-20 lg:flex-wrap justify-between pl-5 items-center overflow-x-auto w-[90%]">
-          <div className=" flex lg:flex-wrap justify-center items-center gap-2 md:gap-4 my-2 h-20 lg:min-h-10  ">
+          <div className=" flex lg:flex-wrap justify-center items-center gap-2 md:gap-4 md:my-2 h-20 lg:min-h-10  ">
             {menuitmes.map((item) => (
               <Link2
                 to={`${item.title}`}
@@ -759,14 +759,14 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
         <section
           key={item.id}
           id={`${item.title}`}
-          className=" flex flex-col  mb-10 mt-10 p-2 last:pb-20"
+          className=" flex flex-col  mb-10 mt-5 md:mt-10 p-2 last:pb-20"
         >
           <div className="divider border-t border-gray-300 mb-5 " />
           <div>
             <h2 className="text-xl md:2xl lg:text-3xl pl-2 lg:pl-10 font-bold ">
               {item.title}
             </h2>
-            <div className="cards pl-2 lg:pl-8 mt-2 lg:mt-5">
+            <div className="cards pl-2 lg:pl-8 mt-2 lg:mt-5 flex flex-wrap gap-5 md:gap- ">
               {products
                 .filter((product) => product.category === item.title) // Filter products based on category
                 .map(
@@ -778,12 +778,12 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                       state={{
                         product: matchingproduct,
                       }}
-                      className="max-w-[300px]"
+                      className="w-[150px] md:w-[max-content]"
                       key={matchingproduct.id}
                     >
                       <div
                         className="
-                        max-w-[180px]
+                        max-w-[150px]
                         lg:max-w-[200px] 
                         card bg-white md:max-w-[230px] p-1 rounded-3xl border-[2px]  border-gray-100 hover:border-yellow-300 hover:border-2 hover:shadow-md shadow-sm cursor-pointer"
                         onClick={() => {
@@ -811,7 +811,7 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                           >
                             {matchingproduct.description.length > 20
                               ? matchingproduct.description
-                                  .substring(0, 50)
+                                  .substring(0, 30)
                                   .concat("  ...more")
                               : matchingproduct.description}
                           </p>
