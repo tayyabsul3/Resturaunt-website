@@ -82,14 +82,14 @@ const Navbar = ({ displayrightnav }) => {
             </div>
             <div className="account border-l-[1px] border-red-600 p-2 cursor-pointer transition duration-500">
               {console.log(UserImageURL)}
-              {loginstatus ? 
+              {UserImageURL ? (
                 <img
                   src={UserImageURL}
                   alt=""
                   className="text-red-600 relative w-[30px] bg-red-600 rounded-full"
                   onClick={toggleDropdown}
                 />
-               : (
+              ) : (
                 <RiAccountCircleFill
                   className="text-red-600 relative"
                   onClick={toggleDropdown}

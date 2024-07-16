@@ -724,7 +724,6 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
     console.log(product);
   }
 
-  
   // Function to handle adding a product to the cart
   function handleAddToCartPress(product) {
     console.log(product);
@@ -736,7 +735,7 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
       {/* Navbar */}
       <nav className="mt-2 flex justify-center items-center ">
         <div className="scroll container lg:w-full mx-auto flex lg:overflow-visible lg:min-h-20 lg:flex-wrap justify-between pl-5 items-center overflow-x-auto w-[90%]">
-          <div className=" flex lg:flex-wrap justify-center items-center md:gap-4 my-2 h-20 lg:min-h-10  ">
+          <div className=" flex lg:flex-wrap justify-center items-center gap-2 md:gap-4 my-2 h-20 lg:min-h-10  ">
             {menuitmes.map((item) => (
               <Link2
                 to={`${item.title}`}
@@ -746,7 +745,7 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                 duration={500}
                 key={item.title}
                 // Add activeClass prop
-                className="linkitem bg-slate-200 rounded-full lg:text-[16px] lg:py-3 lg:px-4 py-2 px-2 hover:bg-yellow-300 cursor-pointer font-bold text-nowrap text-sm "
+                className="linkitem bg-slate-200 rounded-full   lg:text-[16px] lg:py-3 lg:px-4 py-2 px-2 hover:bg-yellow-300 cursor-pointer font-bold text-nowrap text-sm  "
               >
                 {item.title}
               </Link2>
@@ -764,8 +763,10 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
         >
           <div className="divider border-t border-gray-300 mb-5 " />
           <div>
-            <h2 className="text-3xl  pl-10 font-bold ">{item.title}</h2>
-            <div className="cards pl-8 mt-5">
+            <h2 className="text-xl md:2xl lg:text-3xl pl-2 lg:pl-10 font-bold ">
+              {item.title}
+            </h2>
+            <div className="cards pl-2 lg:pl-8 mt-2 lg:mt-5">
               {products
                 .filter((product) => product.category === item.title) // Filter products based on category
                 .map(
@@ -776,14 +777,14 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                       to="product"
                       state={{
                         product: matchingproduct,
-                        
                       }}
                       className="max-w-[300px]"
                       key={matchingproduct.id}
                     >
                       <div
                         className="
-                        max-w-[200px] 
+                        max-w-[180px]
+                        lg:max-w-[200px] 
                         card bg-white md:max-w-[230px] p-1 rounded-3xl border-[2px]  border-gray-100 hover:border-yellow-300 hover:border-2 hover:shadow-md shadow-sm cursor-pointer"
                         onClick={() => {
                           handleCardClick(matchingproduct.id);
@@ -800,8 +801,8 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                         {/* <div className="heart bg-gray-300 w-min rounded-full p-1 absolute top-1 right-1">
                           <RiHeartLine className="text-2xl text-white" />
                         </div> */}
-                        <div className="description mt-2">
-                          <h1 className="font-bold md:text-lg text-center text-[15px]">
+                        <div className="description md:mt-2">
+                          <h1 className="font-bold md:text-lg text-center text-sm">
                             {matchingproduct.name}
                           </h1>
                           <p
@@ -822,7 +823,7 @@ const Itemsnavigator = ({ setproductObject, setDraweropen }) => {
                           </h3>
                           <Link to={"/"} className="addtocartbutton">
                             <button
-                              className=" bg-red-600 px-3 font-bold py-3 rounded-full  text-white hover:bg-yellow-400 hover:text-black mt-1 mb-1  "
+                              className=" bg-red-600 text-sm py-2 px-2  md:px-3 font-bold md:py-3 rounded-full  text-white hover:bg-yellow-400 hover:text-black mt-1 mb-1  "
                               onClick={() => {
                                 handleAddToCartPress(matchingproduct);
                               }}

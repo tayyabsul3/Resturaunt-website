@@ -54,7 +54,13 @@ const Login = () => {
               Password
             </label>
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => 
+                
+                setPassword(e.target.value)
+                
+              }
+                
+                
               value={password}
               type="password"
               id="password"
@@ -64,6 +70,7 @@ const Login = () => {
           </div>
           <button
             onClick={signIn}
+            
             className="w-full bg-red-500 text-white font-semibold py-2 rounded-md hover:bg-red-600 transition duration-300"
           >
             Sign In {/* Updated button text */}
