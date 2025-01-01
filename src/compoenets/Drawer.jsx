@@ -9,6 +9,7 @@ import {
   removerfromcart,
 } from "../features/cartSlice";
 import { showcart } from "../features/drawerSlice";
+import { CgClose } from "react-icons/cg";
 
 const Drawer = () => {
   // Function to handle clearing the cart
@@ -24,7 +25,6 @@ const Drawer = () => {
   };
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems);
 
   // Function to handle increasing the quantity
   const handleIncreaseQuantity = (itemId) => {
@@ -49,8 +49,6 @@ const Drawer = () => {
     // );
   };
   const deleteItemfromcart = (itemId) => {
-    console.log("running first");
-
     if (cartItems.length === 1) {
       setgrandTotal(0);
       dispatch(removerfromcart(itemId));
@@ -62,7 +60,6 @@ const Drawer = () => {
       price = item.quantity * item.price;
       subtotal += price;
       setgrandTotal(subtotal);
-      console.log(price, subtotal);
     });
   };
   const [grandTotdal, setgrandTotal] = useState(0);
@@ -75,11 +72,39 @@ const Drawer = () => {
         price = item.quantity * item.price;
         subtotal += price;
         setgrandTotal(subtotal);
-        console.log(price, subtotal);
       });
     };
     calculatePrice();
   }, [cartItems]);
+
+  function goToCheckoutPage() {
+    alert("running server command");
+    fetch("/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        items: [
+          { id: 1, quantity: 2 },
+          { id: 2, quantity: 1 },
+        ],
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        return res.json().then((json) => Promise.reject(json));
+      })
+      .then(({ url }) => {
+        window.location = url;
+      })
+      .catch((e) => {
+        console.error(e.error);
+      });
+    alert("running server command");
+  }
+
   return (
     <>
       <div
@@ -90,15 +115,23 @@ const Drawer = () => {
       >
         {" "}
       </div>
-      <div className="z-50 rounded-bl-xl rounded-tl-xl p-2 px-4 fixed top-0 right-0 bg-white h-[100vh] w-[500px] transition duration-150">
+      <div className="z-50 rounded-bl-xl rounded-tl-xl p-2 px-4 fixed top-0 right-0 bg-white h-[100vh] w-full md:w-[500px] transition duration-150">
         <div className="">
           <div className="label flex justify-between relative">
             <h1 className="text-xl font-semibold ">Cart</h1>
             <button
-              className="text-2xl text-yellow-500 hover:underline hover:text-yellow-400"
+              className=" text-xl md:text-2xl text-yellow-500 hover:underline hover:text-yellow-400"
               onClick={handleClearCart} // Attach onClick event handler
             >
               Clear cart
+            </button>
+            <button
+              className=" text-xl md:text-2xl text-black hover:underline hover:text-2xl"
+              onClick={() => {
+                dispatch(showcart());
+              }} // Attach onClick event handler
+            >
+              <CgClose className="text-3xl" />
             </button>
           </div>
 
@@ -114,47 +147,46 @@ const Drawer = () => {
                   />
                 </div>
                 <div className="info flex flex-col justify-between w-full">
-
                   <div className="title">
                     <h1 className="font-bold">{item.name}</h1>
                     <p className="text-sm">{item.description}</p>
                   </div>
                   <div>
-                  <p className="text-right my-1">
-                    RS {item.quantity * item.price}.00
-                  </p>
-                  <div className="modify_item flex justify-between">
-                    <div className="qty_controller flex items-center justify-center rounded-full  ">
+                    <p className="text-right my-1">
+                      RS {item.quantity * item.price}.00
+                    </p>
+                    <div className="modify_item flex justify-between">
+                      <div className="qty_controller flex items-center justify-center rounded-full  ">
+                        <button
+                          className="subtract-button px-2  text-white active:mt-[2px]  bg-red-500 hover:bg-yellow-300  rounded-full"
+                          onClick={() => handleDecreaseQuantity(item.id)} // Decrease quantity onClick
+                        >
+                          -
+                        </button>
+                        <p className="mx-1 rounded-lg border-gray-600 border-[1px] px-3 ">
+                          {item.quantity}
+                        </p>
+                        <button
+                          className="add-button text-white  active:mt-[4px] px-2  bg-red-500 hover:bg-yellow-300   rounded-full "
+                          onClick={() => handleIncreaseQuantity(item.id)} // Increase quantity onClick
+                        >
+                          +
+                        </button>
+                      </div>
                       <button
-                        className="subtract-button px-2  text-white active:mt-[2px]  bg-red-500 hover:bg-yellow-300  rounded-full"
-                        onClick={() => handleDecreaseQuantity(item.id)} // Decrease quantity onClick
+                        onClick={() => {
+                          deleteItemfromcart(item.id);
+                        }}
                       >
-                        -
-                      </button>
-                      <p className="mx-1 rounded-lg border-gray-600 border-[1px] px-3 ">
-                        {item.quantity}
-                      </p>
-                      <button
-                        className="add-button text-white  active:mt-[4px] px-2  bg-red-500 hover:bg-yellow-300   rounded-full "
-                        onClick={() => handleIncreaseQuantity(item.id)} // Increase quantity onClick
-                      >
-                        +
+                        <IoTrashBin fontSize={"25px"} />
                       </button>
                     </div>
-                    <button
-                      onClick={() => {
-                        deleteItemfromcart(item.id);
-                      }}
-                    >
-                      <IoTrashBin fontSize={"25px"} />
-                    </button>
-                  </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="checkout fixed  bottom-0 w-[450px] p-2 bg-white">
+          <div className="checkout fixed  bottom-0 w-[90%] md:w-[450px] p-2 bg-white">
             <div className="subtotal flex justify-between w-ful border-t pt-2 bt-[1px] px-4 ">
               <h1 className="text-gray-500"> Subtotal</h1>
               <p className="text-gray-500">Rs {grandTotdal}.00</p>
@@ -169,6 +201,7 @@ const Drawer = () => {
             </div>
             <button
               onClick={() => {
+                goToCheckoutPage();
                 setDraweropen(false);
               }}
               className="w-full bg-red-500 p-3 rounded-full text-white font-bold mt-2 hover:bg-gray-200"

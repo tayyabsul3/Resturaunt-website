@@ -28,6 +28,12 @@ const Signup = () => {
   };
 
   const signUp = async () => {
+    if (password.length < 6) {
+      setPassword("");
+
+      return;
+    }
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setUserImageURL(auth?.currentUser?.photoURL);
@@ -46,7 +52,7 @@ const Signup = () => {
       console.log(UserImageURL);
       console.log();
       setLoginStatus(true);
-      navigate("/");
+      navigate("/login");
       // You can add navigation or other logic here after successful signup
     } catch (error) {
       console.error("Error signing up:", error);
@@ -80,10 +86,18 @@ const Signup = () => {
               type="password"
               id="password"
               className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-red-500"
-              placeholder="Enter your password"
+              placeholder="Enter your password "
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
+            {password.length >= 6 ? (
+              <p className="text-white pl-1 pt-1"> Good password</p>
+            ) : (
+              <p className="text-red-200 pl-1 pt-1">
+                {" "}
+                *Password should be greater than 6
+              </p>
+            )}
           </div>
           <button
             type="button" // Prevent form submission
